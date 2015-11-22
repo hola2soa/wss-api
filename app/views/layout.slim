@@ -1,0 +1,13 @@
+doctype 5
+html
+  head
+    title QueenShopWeb information
+    link rel='stylesheet' type='text/css' href='/style.css'
+  body
+    header
+      == slim :nav
+    section
+      == slim :flash_bar
+      == yield
+    .footer
+      == slim :footer
