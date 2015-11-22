@@ -2,9 +2,6 @@ module UI
 module Query
   def self.registered(app)
     app_get_query = lambda do
-      logger.info 'Enter app_get_query'
-      @action = :create
-      logger.info 'Leave app_get_query'
       slim :query
     end
 
@@ -18,7 +15,7 @@ module Query
       results = CheckProductsFromAPI.new(get_api_url('queenshop/query'), form).call
       error_send back, 'Could not find prices matching products' if (results.code != 200)
 
-      session[:results] = results
+      session[:results] = results.to_json
       flash[:notice] = 'Feel free to bookmark this query and return later'
       redirect "/query/#{results.id}", 303  # redirect get '/query' - app_get_query
     end
@@ -32,14 +29,12 @@ module Query
         else
           request_url = get_api_url("queenshop/query/#{@id}")
           options =  { headers: { 'Content-Type' => 'application/json' } }
-          logger.info request_url
           @results = HTTParty.get(request_url, options)
         end
-        puts @results
         slim :query
       rescue => e
         logger.info e
-        error_send '/queenshop/query', 'could not find api route'
+        error_send '/query', 'could not find api route'
       end
     end
 

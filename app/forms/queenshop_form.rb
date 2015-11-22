@@ -33,11 +33,11 @@ class QueenshopForm
 
   attribute :items, ArrayOfNames
   attribute :prices, ArrayOfPrices
-  attribute :pages, String
+  attribute :pages, String, :default => '1..9'
 
   validates :items, presence: true
   validates :prices, presence: true
-  validates :pages, presence: true
+  validates :pages, presence: false
 
   def error_fields
     errors.messages.keys.map(&:to_s).join(', ')

@@ -29,7 +29,6 @@ class CheckProductsFromAPI
     results = HTTParty.post(@api_url, @options)
     query_results = HolaScraperResult.new(results)
     query_results.code = results.code
-    puts query_results
     query_results
   end
 end
