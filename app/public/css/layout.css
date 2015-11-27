@@ -1,0 +1,59 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  height:100%;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  height:100%;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #339933;
+  border-top: 1px solid #000;
+  text-align: center;
+  color: #fff;
+}
+
+.header .search {
+  position: absolute;
+  top: 50%;
+  margin-left: 17px;
+  margin-top: 17px;
+  z-index: 1;
+  color: #4f5b66;
+}
+
+.left-pane {
+  padding: 10px;
+  position: relative;
+  width: 175px;
+  height: 100%;
+  border: 1px solid #000;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 45px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #000;
+  text-align: center;
+  vertical-align: top;
+}
+
+.container {
+  width: auto;
+  max-width: 680px;
+  padding: 0 15px;
+}
+.container .text-muted {
+  margin: 20px 0;
+}

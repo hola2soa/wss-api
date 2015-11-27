@@ -1,13 +1,26 @@
 doctype 5
 html
   head
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     title QueenShopWeb information
-    link rel='stylesheet' type='text/css' href='/style.css'
+    link rel="stylesheet" type="text/css" href="http://getbootstrap.com/dist/css/bootstrap.min.css"
+    link rel="stylesheet" type="text/css" href="/css/layout.css"
+    link rel="stylesheet" type="text/css" href="/css/ie10-bug-workaround.css"
+    link rel="stylesheet" type="text/css" href="/css/style.css"
   body
-    header
-      == slim :nav
-    section
-      == slim :flash_bar
-      == yield
-    .footer
-      == slim :footer
+    == slim :header
+    
+    div class="left-pane"
+      p menu items and other stuff goes here
+
+    == slim :footer
+
+    /!
+      header
+        == slim :nav
+      section
+        == slim :flash_bar
+        == yield
+      .footer
+        == slim :footer
