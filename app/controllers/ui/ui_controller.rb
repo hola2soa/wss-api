@@ -9,7 +9,7 @@ module Show
         return nil
       end
       logger.info 'load show'
-      slim :show
+      slim :main_pane
     end
 
     app_get_show_item = lambda do
@@ -25,7 +25,7 @@ module Show
           @results = HTTParty.get(request_url, options)
         end
         @products = @results
-        slim :show
+        slim :list_results
       rescue => e
         logger.info e
         error_send '/show', 'Could not find query -- perhaps it was deleted?'
