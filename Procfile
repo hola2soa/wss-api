@@ -1,1 +1,1 @@
-web: bundle exec rerun 'rackup -s puma -p $PORT'
+web: bundle exec puma config.ru -p $PORT
