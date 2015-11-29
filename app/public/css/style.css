@@ -1,3 +1,4 @@
+@media DISABLED {
 html, body
 {
 	height: 100%;
@@ -183,4 +184,5 @@ form .delete
 
 .user-output {
 	float: left;
+}
 }
