@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby '2.2.0'
 
 gem 'puma'
 gem 'sinatra'
@@ -17,7 +18,6 @@ gem 'hirb'
 gem 'httparty'
 gem 'activesupport'
 
-gem 'rack-flash3'
 gem 'slim'
 gem 'tilt'
 
