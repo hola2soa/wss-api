@@ -17,10 +17,16 @@ describe 'Shopping for items' do
     end
   end
   describe 'Searching for an item' do
-      it 'finds an item' do
-        @browser.text_field(name: 'item').set 's'
-        @browser.button(name: 'submit').click
-        @browser.table(class: 'center').rows.count.must_be :>=, 30
-      end
+    it 'finds an item' do
+      @browser.text_field(name: 'item').set 's'
+      @browser.button(name: 'submit').click
+      @browser.table(class: 'center').rows.count.must_be :>=, 30
     end
+  end
+
+  after do
+    @browser.close
+    # @headless.destroy
+    # destroy causes test to hang need to dig into this issue
+  end
 end
