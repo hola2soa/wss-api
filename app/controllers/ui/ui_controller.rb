@@ -2,15 +2,14 @@ module UI
 module Show
   def self.registered(app)
     app_get_show = lambda do
-    #  @item = params[:item]
-    @item="s"
+    @item = params[:item]
+    logger.info @item
       if @item
         logger.info 'redirected to get items'
         redirect "/show/#{@item}"
         return nil
       end
       logger.info 'load show'
-      logger.info @item
       slim :main_pane
     end
 
@@ -26,14 +25,33 @@ module Show
           logger.info '+++++++++++'
           logger.info request_url
           options =  { headers: { 'Content-Type' => 'application/json' } }
-      #    @results = HTTParty.get(request_url, options)
+          @results = HTTParty.get(request_url, options)
         end
         logger.info "after HTTParty.get"
         @products = @results
-        @linechartdata={"100~200"=>4,"200~300"=>6,"300~400"=>18,"400~500"=>10,"500~600"=>2}
-
-        logger.info "after linechartdata"
-        logger.info @linechartdata
+        #intialize counter
+        count_0_300 =0
+        count_300_600 =0
+        count_600_900 =0
+        count_900_1200 =0
+        count_1200_up =0
+        #count number of items each range of price
+        @products.each do |product|
+          if product["price"].to_i <300
+            count_0_300 = count_0_300 + 1
+          elsif product["price"].to_i <600
+            count_300_600 = count_300_600 + 1
+          elsif product["price"].to_i <900
+            count_600_900 = count_600_900 + 1
+          elsif product["price"].to_i <1200
+            count_900_1200 = count_900_1200 + 1
+          else
+            count_1200_up = count_1200_up + 1
+          end
+        end
+        # " "=>0 is used to adjust appearance
+        @linechartdata={"0~300"=>count_0_300,"300~600"=>count_300_600,"600~900"=>count_600_900,
+          "900~1200"=>count_900_1200,"1200 up"=>count_1200_up," "=>0}
         slim :list_results
       rescue => e
         logger.info e

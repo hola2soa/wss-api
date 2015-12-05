@@ -1,3 +1,14 @@
--if @linechartdata
+-if @products
   div
-  == line_chart @linechartdata
+   == column_chart @linechartdata, library:{chartArea:{width:'100%'}}, id: 'progress', height: '300px', width: '100px'
+   table width="500px" class='center'
+    tbody
+     tr
+       th width="400px" Name
+       th Price
+     -@products.each do |product|
+       tr
+         td width="100px"
+           = product["title"]
+         td width='300'
+           = product["price"]
