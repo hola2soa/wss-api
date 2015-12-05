@@ -24,6 +24,7 @@ GEM
     backports (3.6.7)
     bond (0.5.1)
     builder (3.2.2)
+    chartkick (1.4.1)
     childprocess (0.5.8)
       ffi (~> 1.0, >= 1.0.11)
     coercible (1.0.0)
@@ -123,6 +124,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   activesupport
+  chartkick
   headless
   hirb
   httparty
