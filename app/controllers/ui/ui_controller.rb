@@ -30,7 +30,7 @@ module Show
         end
         logger.info "after HTTParty.get"
         @products = @results
-        @linechartdata={"100~200"=>4,"200~300"=>6,"300~400"=>8}
+        @linechartdata={"100~200"=>4,"200~300"=>6,"300~400"=>8,"400~500"=>10,"500~600"=>2}
         logger.info "after linechartdata"
         logger.info @linechartdata
         slim :list_results
