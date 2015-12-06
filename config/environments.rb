@@ -5,7 +5,7 @@ require 'rack-flash'
 require 'httparty'
 require 'hirb'
 require 'slim'
-
+require 'chartkick'
 require 'active_support'
 require 'active_support/core_ext'
 

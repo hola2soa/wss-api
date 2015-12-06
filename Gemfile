@@ -20,6 +20,7 @@ gem 'activesupport'
 
 gem 'slim'
 gem 'tilt'
+gem 'chartkick'
 
 group :development do
   gem 'tux'
