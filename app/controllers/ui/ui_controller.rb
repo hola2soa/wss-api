@@ -8,6 +8,18 @@ module Show
         redirect "/show/#{@item}"
         return nil
       end
+
+      options =  { headers: { 'Content-Type' => 'application/json' } }
+      request_url = get_api_url("?store=queenshop")
+      @results1 = HTTParty.get(request_url, options)
+      request_url = get_api_url("?store=stylemooncat")
+      @results2 = HTTParty.get(request_url, options)
+
+      #combine result
+      @products=[]
+      @results1.each {|result| @products.push(result) if result["price"].to_i>0}
+      @results2.each {|result| @products.push(result) if result["price"].to_i>0}
+
       logger.info 'load show'
       slim :main_pane
     end
