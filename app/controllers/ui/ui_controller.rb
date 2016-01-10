@@ -14,6 +14,11 @@ module Show
       @results1 = HTTParty.get(request_url, options)
       request_url = get_api_url("?store=stylemooncat")
       @results2 = HTTParty.get(request_url, options)
+      if @results1[0]["title"] == nil && @results1[1]["title"] == nil
+        @results1 =[{"title"=>"尖頭壓紋平底跟鞋*2色", "price"=>"540", "images"=>["http://www.stylemooncat.com.tw/photo/09070006/09070006.jpg"], "link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=24732"},{"title"=>"純色彈性窄管褲*2色","price"=>380,"images"=>["http://www.stylemooncat.com.tw/photo/05020056/05020056.jpg"],"link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=24135"}]
+        @results1.push({"title"=>"高挺及膝中長大衣*3色1380","price"=>980,"images"=>["http://www.stylemooncat.com.tw/photo/04090001/04090001.jpg"],"link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=25601-dn"})
+        @results1.push({"title"=>"羅紋立領合身毛衣*4色","price"=>330,"images"=>["http://www.stylemooncat.com.tw/photo/01110084/01110084.jpg"],"link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=24724"})
+      end
 
       #combine result
       @products=[]
@@ -67,6 +72,12 @@ module Show
         end
 
         @products = []
+        logger.info @results1[0]["title"]
+        if @results1[0]["title"] == nil && @results1[1]["title"] == nil
+          @results1 =[{"title"=>"尖頭壓紋平底跟鞋*2色", "price"=>"540", "images"=>["http://www.stylemooncat.com.tw/photo/09070006/09070006.jpg"], "link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=24732"},{"title"=>"純色彈性窄管褲*2色","price"=>380,"images"=>["http://www.stylemooncat.com.tw/photo/05020056/05020056.jpg"],"link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=24135"}]
+          @results1.push({"title"=>"高挺及膝中長大衣*3色1380","price"=>980,"images"=>["http://www.stylemooncat.com.tw/photo/04090001/04090001.jpg"],"link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=25601-dn"})
+          @results1.push({"title"=>"羅紋立領合身毛衣*4色","price"=>330,"images"=>["http://www.stylemooncat.com.tw/photo/01110084/01110084.jpg"],"link"=>"http://www.stylemooncat.com.tw/PDContent.asp?yano=24724"})
+        end
         #combine results
         @results1.each { |result| @products.push(result)} if @results1!=nil
         @results2.each { |result| @products.push(result)} if @results2!=nil

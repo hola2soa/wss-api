@@ -1,6 +1,6 @@
 # Hola Service [ ![Codeship Status for hola2soa/hola-world](https://codeship.com/projects/5a6c37d0-788e-0133-9d23-42fad4cc0ef7/status?branch=master)](https://codeship.com/projects/118585)
 
-Take a look: <a href="https://hola2soa-web.herokuapp.com/" target="_blank">live site</a>
+Take a look: <a href="https://safe-mountain-9085.herokuapp.com/" target="_blank">live site</a>
 
 Handles:
 - GET   / redirects to /show
@@ -14,5 +14,3 @@ Handles:
 TODO:
   - pin/unpin items (sort of like bookmark)
   - scrape using color of clothes
-  - display graph or some visualization
-  - change API to integrate the 3 APIs not only Queeshop
