@@ -8,7 +8,9 @@ require 'slim'
 require 'chartkick'
 require 'active_support'
 require 'active_support/core_ext'
-
+require 'stylemooncat'
+require 'joyceshop'
+require 'queenshop'
 # Ensure app.rb gets loaded before all routes
 require File.expand_path('../../app', __FILE__)
 

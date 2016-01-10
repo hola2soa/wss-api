@@ -8,6 +8,7 @@ Handles:
     - displays the dashboard
   - /show/\<item name\>
     - searches for item and displays a list of items matching name with their respective price
+    - if item match category ,it will search by category
   - /query
     - work in progress,
 

@@ -11,7 +11,10 @@ module Show
 
       options =  { headers: { 'Content-Type' => 'application/json' } }
       request_url = get_api_url("?store=queenshop")
-      @results1 = HTTParty.get(request_url, options)
+    #  @results1 = HTTParty.get(request_url, options)
+      scrape = StyleMoonCat::Scraper.new
+      @results1 = scraper.scrape("allitems",{:keyword=>@item})
+      logger.info @results1
       request_url = get_api_url("?store=stylemooncat")
       @results2 = HTTParty.get(request_url, options)
       if @results1[0]["title"] == nil && @results1[1]["title"] == nil
