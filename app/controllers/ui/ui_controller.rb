@@ -30,16 +30,13 @@ module Show
           logger.info request_url
           @results3 = HTTParty.get(request_url, options)
           logger.info request_url
-
         end
+
         @products = []
-    #    logger.info @results1.length
-    #    logger.info @results2.length
-    #    logger.info @results3.length
         #combine results
-        @results1.each { |result| @products.push(result)}  if @results1.length >0
-        @results2.each { |result| @products.push(result)} if @results2.length >0
-        @results3.each { |result| @products.push(result)} if @results3.length >0
+        @results1.each { |result| @products.push(result)}
+        @results2.each { |result| @products.push(result)}
+        @results3.each { |result| @products.push(result)}
 
         #intialize counter
         @count_0_300 =0
@@ -63,7 +60,7 @@ module Show
               @count_1200_up = @count_1200_up + 1
             end
           end
-          logger.info "#{@count_0_300}  #{@count_300_600}  #{@count_600_900}  #{@count_900_1200}  #{@count_1200_up}"
+        #  logger.info "#{@count_0_300}  #{@count_300_600}  #{@count_600_900}  #{@count_900_1200}  #{@count_1200_up}"
         end
         # " "=>0 is used to adjust appearance
         @columnchartdata={"0~300"=>@count_0_300,"300~600"=>@count_300_600,"600~900"=>@count_600_900,
