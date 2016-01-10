@@ -1,6 +1,6 @@
 module ApplicationHelpers
-  API_BASE_URI = 'https://hola2soa-api.herokuapp.com'
-  API_VER = '/api/v1/'
+  API_BASE_URI = 'https://wss-dynamo.herokuapp.com'
+  API_VER = '/api/v1'
 
   def current_page?(path = ' ')
     path_info = request.path_info
