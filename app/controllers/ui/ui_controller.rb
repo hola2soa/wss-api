@@ -15,39 +15,59 @@ module Show
     app_get_show_item = lambda do
       begin
         @item = params[:item]
-
+        logger.info @item
         if session[:results]
           @results = session[:results]
           session[:results] = nil
         else
-          request_url = get_api_url("queenshop/#{@item}")
           options =  { headers: { 'Content-Type' => 'application/json' } }
-          @results = HTTParty.get(request_url, options)
+          request_url = get_api_url("?store=queenshop&keyword=#{URI.escape(@item)}")
+          @results1 = HTTParty.get(request_url, options)
+          request_url = get_api_url("?store=joyceshop&keyword=#{URI.escape(@item)}")
+          logger.info request_url
+          @results2 = HTTParty.get(request_url, options)
+          request_url = get_api_url("?store=stylemooncat&keyword=#{URI.escape(@item)}")
+          logger.info request_url
+          @results3 = HTTParty.get(request_url, options)
+          logger.info request_url
+
         end
-        @products = @results
+        @products = []
+    #    logger.info @results1.length
+    #    logger.info @results2.length
+    #    logger.info @results3.length
+        #combine results
+        @results1.each { |result| @products.push(result)}  if @results1.length >0
+        @results2.each { |result| @products.push(result)} if @results2.length >0
+        @results3.each { |result| @products.push(result)} if @results3.length >0
+
         #intialize counter
-        count_0_300 =0
-        count_300_600 =0
-        count_600_900 =0
-        count_900_1200 =0
-        count_1200_up =0
+        @count_0_300 =0
+        @count_300_600 =0
+        @count_600_900 =0
+        @count_900_1200 =0
+        @count_1200_up =0
+
         #count number of items each range of price
         @products.each do |product|
-          if product["price"].to_i <300
-            count_0_300 = count_0_300 + 1
-          elsif product["price"].to_i <600
-            count_300_600 = count_300_600 + 1
-          elsif product["price"].to_i <900
-            count_600_900 = count_600_900 + 1
-          elsif product["price"].to_i <1200
-            count_900_1200 = count_900_1200 + 1
-          else
-            count_1200_up = count_1200_up + 1
+          if product["price"].to_i >0
+            if product["price"].to_i <300
+              @count_0_300 = @count_0_300 + 1
+            elsif product["price"].to_i <600
+              @count_300_600 = @count_300_600 + 1
+            elsif product["price"].to_i <900
+              @count_600_900 = @count_600_900 + 1
+            elsif product["price"].to_i <1200
+              @count_900_1200 = @count_900_1200 + 1
+            else
+              @count_1200_up = @count_1200_up + 1
+            end
           end
+          logger.info "#{@count_0_300}  #{@count_300_600}  #{@count_600_900}  #{@count_900_1200}  #{@count_1200_up}"
         end
         # " "=>0 is used to adjust appearance
-        @columnchartdata={"0~300"=>count_0_300,"300~600"=>count_300_600,"600~900"=>count_600_900,
-          "900~1200"=>count_900_1200,"1200 up"=>count_1200_up," "=>0}
+        @columnchartdata={"0~300"=>@count_0_300,"300~600"=>@count_300_600,"600~900"=>@count_600_900,
+          "900~1200"=>@count_900_1200,"1200 up"=>@count_1200_up," "=>0}
         slim :list_results
       rescue => e
         logger.info e
