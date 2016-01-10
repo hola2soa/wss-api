@@ -6,9 +6,9 @@ div class="item-container"
           div class="unpin"
             p ....
         div class="item-image"
-          a href=product["link"]
-          img src=product["images"][0] width="265px" height="315"
+         img src=product["images"][0] width="265px" height="315"
         div class="item-footer"
-           = product["title"]
+           a href=product["link"]
+            = product["title"].split('售')[0]
            = "  "
            = product["price"]

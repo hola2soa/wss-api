@@ -1,16 +1,15 @@
 -if @products
   div
    == column_chart @columnchartdata, library:{chartArea:{width:'100%'}}, id: 'progress', height: '300px', width: '100px'
-   table width="500px" class='center'
-    tbody
-     tr
-       th width="400px" Name
-       th Price
-     -@products.each do |product|
-       tr
-         td width="100px"
-          center
-           = product["title"]
-         td width='300'
-          center
-           = product["price"]
+  div class="item-container"
+    ul class="multiple_columns"
+      - @products.each do |product|
+        - if product["images"]!=nil
+          li
+            div class="item-image"
+             img src=product["images"][0] width="265px" height="315"
+            div class="item-footer"
+              a href=product["link"]
+               = product["title"].split('售')[0]
+               = "  "
+              = product["price"]
