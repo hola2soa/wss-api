@@ -3,6 +3,8 @@ require_relative 'spec_helper'
 require 'json'
 
 describe 'Shopping for items' do
+  include PageObject::PageFactory
+
   before do
     unless @browser
       @headless = Headless.new
@@ -13,14 +15,19 @@ describe 'Shopping for items' do
 
   describe 'Go to home page' do
     it 'finds the title' do
-      @browser.title.must_equal 'Hola'
+      visit HomePage do |page|
+        page.homepage_title.must_equal 'Hola'   #  @browser.title.must_equal 'Hola'
+      end
     end
   end
+
   describe 'Searching for an item' do
     it 'finds an item' do
-      @browser.text_field(name: 'item').set 's'
-      @browser.button(name: 'submit').click
-      @browser.table(class: 'center').rows.count.must_be :>=, 30
+      visit ItemPage do |page|
+        page.item_keyword.set 's'
+        page.search_button.click
+        page.results_table.rows.count.must_be :>=, 30
+      end
     end
   end
 
